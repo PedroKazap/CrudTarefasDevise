@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_183206) do
+ActiveRecord::Schema.define(version: 2019_10_31_124206) do
+
+  create_table "comentarios", force: :cascade do |t|
+    t.integer "tarefa_id", null: false
+    t.text "conteudo"
+    t.string "usuario"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tarefa_id"], name: "index_comentarios_on_tarefa_id"
+  end
+
+  create_table "tarefas", force: :cascade do |t|
+    t.string "titulo"
+    t.text "conteudo"
+    t.string "usuario"
+    t.text "situação"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,4 +42,5 @@ ActiveRecord::Schema.define(version: 2019_10_30_183206) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comentarios", "tarefas"
 end

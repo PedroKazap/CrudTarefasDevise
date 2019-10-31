@@ -1,0 +1,21 @@
+<h1><%= "comentatios para a tarefa: #{@comentario.tarefa_id}"%> </h1>
+<tbody>
+  <% @comentarios.each do |comentario| %>
+  <% if @comentario.tarefa_id == comentario.tarefa_id %>
+  <tr>
+      <p>
+        <strong>Comentario::</strong>
+        <%= comentario.conteudo %>
+      </p>
+      <p>
+        <strong>Usuario:</strong>
+        <%= comentario.usuario %>
+      </p>
+      <%= link_to 'Editar comentario', edit_comentario_path(comentario) %> |
+    </tr>
+  <% end %>
+  
+  <% end %>
+</tbody>
+<br><br><br><br>
+<%= link_to 'Back', comentarios_path %>

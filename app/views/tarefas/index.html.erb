@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tarefas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titulos</th>
+      <th>Conteudo</th>
+      <th>Usuario</th>
+      <th>situação</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tarefas.each do |tarefa| %>
+    <tr>
+      <td><%= tarefa.titulo %></td>
+      <td><%= tarefa.conteudo %></td>
+      <td><%= tarefa.usuario %></td>
+      <td><%= tarefa.situação %></td>
+      <td><%= link_to 'Mostrar detalhes', tarefa %></td>
+      <td><%= link_to 'Edit', edit_tarefa_path(tarefa) %></td>
+      <td><%= link_to 'Destroy', tarefa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td>comentarios:</td>
+      <td>
+        <% @comentarios_options_for_select.each do |coment|%>
+        <%if coment.tarefa_id == tarefa.id%>
+        <%= '|'%>   
+        <%= link_to coment.conteudo, tarefa_comentario_path(tarefa.id, coment.id)%>
+        <%= '|'%>
+        <% end %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'ir para Comentarios', comentarios_path %>
+<%= link_to 'New Tarefa', new_tarefa_path %>
